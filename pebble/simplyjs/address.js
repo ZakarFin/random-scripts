@@ -2,7 +2,11 @@
 simply.text({ title: 'Address', body: 'Resolving... please wait' });
 
 function showResults(data) {
-	var msg = data.address.road + '\n' + 
+	var roadaddr = data.address.road;
+	if(data.address.house) {
+		roadaddr = roadaddr + ' ' + data.address.house;
+	}
+	var msg = roadaddr + '\n' + 
 		data.address.suburb + ' / ' + data.address.city_district + '\n' + 
 		data.address.postcode + '  ' + data.address.city;
 	simply.body(msg);
