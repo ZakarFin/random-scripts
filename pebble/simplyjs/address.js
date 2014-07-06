@@ -1,5 +1,6 @@
 
 simply.text({ title: 'Address', body: 'Resolving... please wait' });
+simply.scrollable(true);
 
 function showResults(data) {
 	var roadaddr = data.address.road;
@@ -10,7 +11,6 @@ function showResults(data) {
 		data.address.suburb + ' / ' + data.address.city_district + '\n' + 
 		data.address.postcode + '  ' + data.address.city;
 	simply.body(msg);
-    simply.scrollable(true);
 }
 
 navigator.geolocation.getCurrentPosition(function(pos) {
