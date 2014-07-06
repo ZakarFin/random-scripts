@@ -18,6 +18,6 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 	simply.body('Error getting location');
 }, {
   enableHighAccuracy: true,
-  timeout: 5000,
+  timeout: 60000,
   maximumAge: 0
 });
