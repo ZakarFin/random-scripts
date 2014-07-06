@@ -1,8 +1,10 @@
 
 function showResults(data) {
 	var msg = data.address.road + '\n' + 
-		data.address.postcode + '  ' + data.address.city;
-    simply.text({ title: data.display_name, subtitle: msg });
+		data.address.postcode + '  ' + data.address.city + '\n' +
+		data.display_name;
+    simply.text({ title: 'Address', body: msg });
+    simply.scrollable(true);
 }
 
 navigator.geolocation.getCurrentPosition(function(pos) {
