@@ -40,6 +40,7 @@ function showResults(data) {
         msg = msg + key + ': ' + data.address[key] + '\n';
     }
     simply.body(msg);
+    notifyUser();
 }
 
 function locationErrorHandler(err, wasHighAccuracy) {
