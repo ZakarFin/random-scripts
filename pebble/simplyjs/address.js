@@ -10,7 +10,8 @@ simply.on('singleClick', function(e) {
 });
 
 function locateUser(highAccuracy) {
-    if(highaccuracy) {
+    if(highAccuracy) {
+        // reset message
         simply.body('Resolving... please wait');
     }
     startedAt = timestamp();
