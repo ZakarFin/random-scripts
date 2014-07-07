@@ -1,11 +1,11 @@
 # Sample scriptlets for Pebble/simply.js
 
-These are scripts to be used with Pebbl-watch and Pebble app called simply.js:
+These are scripts to be used with Pebble-watch and Pebble-app called simply.js:
 
 * https://getpebble.com
 * http://simplyjs.io
 
-Install simply.js on your Pebble (it's in Pebble store) and configure it:
+Install simply.js on your Pebble (it's in Pebble appstore) and configure it:
 
 ## To get your current address based on OpenStreetmap reverse geocoding:
 
