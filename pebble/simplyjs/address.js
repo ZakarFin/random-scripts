@@ -1,7 +1,11 @@
-simply.title('Address');
+simply.text( {
+    title :'Address', 
+    body : 'Resolving... please wait'
+});
 simply.scrollable(true);
 var startedAt = timestamp();
-locateUser(true);
+// try for low accuracy first
+locateUser(false);
 
 simply.on('singleClick', function(e) {
     if(e.button === 'select') {
