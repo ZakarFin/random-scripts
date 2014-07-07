@@ -1,19 +1,19 @@
-simply.text({
-    title: 'Address',
-    body: 'Resolving... please wait'
-});
+simply.title('Address');
 simply.scrollable(true);
 var startedAt = timestamp();
 locateUser(true);
 
 simply.on('singleClick', function(e) {
     if(e.button === 'select') {
-        simply.body('Resolving... please wait');
         locateUser(true);
     }
 });
 
 function locateUser(highAccuracy) {
+    if(highaccuracy) {
+        simply.body('Resolving... please wait');
+    }
+    startedAt = timestamp();
     var opts = {
         enableHighAccuracy: !!highAccuracy,
         timeout: 10000,
