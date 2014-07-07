@@ -1,30 +1,70 @@
-
-simply.text({ title: 'Address', body: 'Resolving... please wait' });
+simply.text({
+    title: 'Address',
+    body: 'Resolving... please wait'
+});
 simply.scrollable(true);
+var startedAt = timestamp();
+locateUser(true);
 
-function showResults(data) {
-	var roadaddr = data.address.road;
-	if(data.address.house) {
-		roadaddr = roadaddr + ' ' + data.address.house;
-	}
-	var msg = roadaddr + '\n' + 
-		data.address.suburb + ' / ' + data.address.city_district + '\n' + 
-		data.address.postcode + '  ' + data.address.city;
-	simply.body(msg);
+simply.on('singleClick', function(e) {
+    if(e.button === 'select') {
+        simply.body('Resolving... please wait');
+        locateUser(true);
+    }
+});
+
+function locateUser(highAccuracy) {
+    var opts = {
+        enableHighAccuracy: !!highAccuracy,
+        timeout: 10000,
+        maximumAge: 0
+    };
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        var coords = pos.coords;
+        var reverseGeocodeUrl = 'http://open.mapquestapi.com/nominatim/v1/reverse.php?' +
+            'format=json' +
+            '&lat=' + coords.latitude +
+            '&lon=' + coords.longitude;
+        ajax({
+            url: reverseGeocodeUrl,
+            type: 'json'
+        }, showResults, ajaxErrorHandler);
+    }, function(err) {
+        errorHandler(err, true);
+    }, opts);
 }
 
-navigator.geolocation.getCurrentPosition(function(pos) {
-  var coords = pos.coords;
-//&json_callback=showResults
-  var reverseGeocodeUrl = 'http://open.mapquestapi.com/nominatim/v1/reverse.php?' +
-  'format=json&units=metric' + 
-  '&lat=' + coords.latitude + 
-  '&lon=' + coords.longitude;
-  ajax({ url: reverseGeocodeUrl, type: 'json' }, showResults);
-},function(err) {
-	simply.body('Error resolving location');
-}, {
-  enableHighAccuracy: true,
-  timeout: 60000,
-  maximumAge: 0
-});
+function showResults(data) {
+    var msg = '';
+    for(var key in data.address) {
+        msg = msg + key + ': ' + data.address[key] + '\n';
+    }
+    simply.body(msg);
+}
+
+function locationErrorHandler(err, wasHighAccuracy) {
+    if(wasHighAccuracy) {
+        // highaccuracy fails indoors and such
+        simply.body('Error resolving accurate location');
+        locateUser(false)
+    }
+    else {
+        simply.body('Error resolving location');
+        notifyUser();
+    }
+}
+function ajaxErrorHandler(err) {
+    simply.body('Error resolving address');
+    notifyUser();
+}
+
+function notifyUser() {
+    if(timestamp() > startedAt + 5000) {
+        // more that 5 seconds elapsed, user isn't propably looking anymore
+        simply.vibe();
+    }
+}
+
+function timestamp() {
+    return new Date().getTime();
+}
