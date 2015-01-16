@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fi">
+<head>
+    <title>HSL Seuraavat bussit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<script type="text/javascript"
+        src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+<script type="text/javascript"
+        src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment-with-locales.min.js"></script>
+
+    <script src="busschedule.js"></script>
+</head>
+
+<body ng-app="busschedule">
+
+    <!-- stopnumber can be determined f.ex. in here: http://www.pubtrans.it/hsl/near/ -->
+    <div ng-controller="ListController" data-stopnumber="2133210" data-maxresults="15">
+        <h3>Seuraavat bussit</h3>
+        <ol>
+            <li ng-repeat="bus in data">
+                {{bus.until}} ({{bus.time}}) - <b>{{bus.line}}</b> <br/>
+                <span ng-hide="bus.info == ''">Lisäinfo : {{bus.info}}<br/></span>
+            </li>
+        </ol>
+    </div>
+</body>
+</html>
