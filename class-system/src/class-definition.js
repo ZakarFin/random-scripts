@@ -2,7 +2,7 @@
     if (typeof define === "function" && define.amd) define(["lodash"], factory);
     else if (typeof module === "object")  module.exports = factory;
     else {
-    	// lodash expected as global "_", but not available
+    	// lodash expected as global "_"
     	global.ClassDefinition = factory(_);
     }
 }(this, function(_) {
