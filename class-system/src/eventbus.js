@@ -17,7 +17,7 @@
         });
         return {
             "on" : function(event, handlerFn) {
-                store.subscribers(event, handlerFn, true);
+                return store.subscribers(event, handlerFn, true);
             },
             "off" : function(event, handlerFn) {
                 var currentSubs = store.subscribers(event);
