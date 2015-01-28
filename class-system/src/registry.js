@@ -60,7 +60,7 @@
 
 			_.each(metadata.extend, function(parent) {
 				def.inherit(parent);
-			})
+			});
 			_.forIn(methods, function(value, key) {
 				def.addProperty(key, value);
 			});
@@ -95,5 +95,5 @@
 			}
 			return result;
 		}
-	}
+	};
 }));

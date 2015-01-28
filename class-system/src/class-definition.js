@@ -15,12 +15,12 @@
 			// maybe check registry is an object with definition()?
 			name = registry;
 			registry = null;
-		};
+		}
 		var _constructors = [];
 		var _body = {};
 		var _parents = [];
 		var _types = [];
-		var _builder = undefined;
+		var _builder;
 		var _registry = function(name, value) {
 			// register change in def
 			if(!registry) {
@@ -31,7 +31,7 @@
 				return;
 			}
 			return registry.definition(name, value);
-		}
+		};
 		return {
 			getName : function() {
 				return name;
@@ -113,7 +113,7 @@
 				// this might not be necessary...
 				_.each(def.getParents(), function(elder) {
 					me.inherit(elder, me);
-				})
+				});
 
 				// register change in def
 				_registry(me.getName(), me);
@@ -142,7 +142,7 @@
 				};
 				return new _builder(arguments);
 			}
-		}
+		};
 	};
 	return ClassDefinition;
 }));
