@@ -12,12 +12,14 @@
     "lodash": "^2.4.1"
   },
   "devDependencies": {
+    "browserify": "^8.1.1",
     "intern": "^2.2.2",
     "jshint": "^2.6.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/intern-client config=tests/intern",
-    "analyse" : "./node_modules/jshint/bin/jshint src"
+    "analyse": "./node_modules/jshint/bin/jshint src",
+    "browserify" : "./node_modules/browserify/bin/cmd.js src/*.js > src-all.js"
   },
   "author": "Sami Mäkinen",
   "license": "MIT"
