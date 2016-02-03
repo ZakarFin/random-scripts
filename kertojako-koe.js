@@ -30,26 +30,22 @@ function getRandom(min, max) {
     return Math.floor((Math.random() * max) + min);
 }
 
-function getPair(min, max) {
-    return [getRandom(min, max), getRandom(min, max)];
-}
-
 function generateCalcs() {
     for(var i = 0; i < totalNumber; ++i) {
-        var pair = getPair(min, max);
+        var first = getRandom(min, max);
         var chance = Math.random();
-        if(chance < 0.3 || pair[0] === 0) {
-            console.log(pair[0] + " x " + pair[1] + " = ");
+        var calcNum = i +1;
+        if(chance < 0.3 || first === 0) {
+            console.log(calcNum + ") " + first + " x " + getRandom(min, max) + " = ");
         } else {
-            var multip = pair[0] * pair[1]
-            if(chance > 0.7 && pair[0] != 1) {
+            var multip = first * getRandom(min, max);
+            if(chance > 0.7 && first > 1) {
                 // Introduce jakojäännös
-                multip += getRandom(1, pair[0] - 1);
+                multip += getRandom(1, first - 1);
             }
-            //pair = pair.sort(function(a, b) { return a > b; });
-            console.log(multip + " : " + pair[0] + " = ");
-            if(multip % pair[0] !== 0) {
-                console.log(" - Jakojäännös = ");
+            console.log(calcNum + ") " + multip + " : " + first + " = ");
+            if(multip % first !== 0) {
+                console.log("   Jakojäännös = ");
             }
         }
     }
